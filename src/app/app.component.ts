@@ -43,9 +43,15 @@ export class AppComponent implements OnInit {
     "order_id": "",
     "handler": (res: any) => {
       console.log(res);
-      this.http.get('http://localhost:3000/razorpay/paymentC', { params: res }).subscribe((data => {
-        console.log(data)
-      }))
+      try{
+        this.http.post('http://localhost:3000/razorpay/paymentCapture', res).subscribe((data => {
+          console.log(data)
+        }))
+      }
+      catch(err){
+        console.log(err)
+      }
+     
     }
   }
 
