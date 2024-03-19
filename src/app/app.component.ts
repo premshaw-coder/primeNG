@@ -13,12 +13,17 @@ declare var Razorpay: any;
   imports: [CommonModule, RouterOutlet, FormsModule, HttpClientModule, RouterModule],
   providers: [HttpClient],
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   constructor(private http: HttpClient) {
 
   }
   ngOnInit(): void {
-    console.log(window.location.pathname)
+    // console.log(window.location.pathname)
+    // if (window.location.pathname.length > 4) {
+    //   this.http.get('http://localhost:3000/phonePe/paymentCapture' + window.location.pathname).subscribe((res: any) => {
+    //     console.log(res)
+    //   });
+    // }
   }
 
   initialize() {
