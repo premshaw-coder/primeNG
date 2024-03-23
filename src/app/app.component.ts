@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-
+import { DialogService, DynamicDialogConfig } from 'primeng/dynamicdialog';
+import { ModalComponent } from './modal.component';
 declare var Razorpay: any;
 @Component({
   selector: 'app-root',
@@ -11,10 +12,10 @@ declare var Razorpay: any;
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   imports: [CommonModule, RouterOutlet, FormsModule, HttpClientModule, RouterModule],
-  providers: [HttpClient],
+  providers: [HttpClient, DialogService],
 })
 export class AppComponent implements OnInit {
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private dialogService: DialogService) {
 
   }
   ngOnInit(): void {
@@ -43,15 +44,15 @@ export class AppComponent implements OnInit {
     "order_id": "",
     "handler": (res: any) => {
       console.log(res);
-      try{
+      try {
         this.http.post('http://localhost:3000/razorpay/paymentCapture', res).subscribe((data => {
           console.log(data)
         }))
       }
-      catch(err){
+      catch (err) {
         console.log(err)
       }
-     
+
     }
   }
 
@@ -78,4 +79,17 @@ export class AppComponent implements OnInit {
     //   console.log(res)
     // });
   }
+
+  razorpayNormalRefund() {
+    this.http.post('http://localhost:3000/razorpay/normal/refund', "").subscribe((res: any) => {
+      console.log(res)
+    })
+  }
+
+  razorpayInstantRefund() {
+    this.http.post('http://localhost:3000/razorpay/instant/refund', "").subscribe((res: any) => {
+      console.log(res)
+    })
+  }
+
 }
